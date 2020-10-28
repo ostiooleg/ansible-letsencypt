@@ -1,0 +1,23 @@
+{% for item in nginx_virtualhost.values() %}
+server {
+    listen {{ item.listen }} default_server;
+    server_name {{ item.server_name }};
+
+    location /.well-known/acme-challenge {
+        root /var/www/letsencrypt;
+        try_files $uri $uri/ =404;
+    }
+
+     location / {
+        rewrite ^ https://{{ item.server_name }}$request_uri? permanent;
+    }
+
+    error_page  500 502 503 504  /50x.html;
+    location = /50x.html {
+        root  /usr/share/nginx/html;
+    }
+
+    access_log {{ item.access_log }};
+    error_log {{ item.error_log }};
+}
+{% endfor %}

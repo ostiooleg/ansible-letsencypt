@@ -1,0 +1,13 @@
+---
+  domain_name: ostioleg.devops.rebrain.srwx.net
+  virtualhost_ssl_name: ostioleg.devops.rebrain.srwx.net-ssl.conf
+  letsencrypt_email: test@test.com
+
+  nginx_virtualhost_ssl:
+    info:
+      listen_ssl: 443
+      server_name: ostioleg.devops.rebrain.srwx.net
+      root: /home/ostioleg.devops.rebrain.srwx.net
+      access_log: /var/log/ostioleg.devops.rebrain.srwx.net.access.log
+      error_log: /var/log/ostioleg.devops.rebrain.srwx.net.error.log
+...

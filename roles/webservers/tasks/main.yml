@@ -1,0 +1,29 @@
+---
+- name: Install nginx
+  yum:
+    name: nginx
+    state: present
+
+- name: Start nginx
+  service:
+    name: nginx
+    state: started
+
+- name: Write nginx.conf
+  template:
+    src: nginx.conf.j2
+    dest: /etc/nginx/nginx.conf
+
+- name: Write nginx virtualhost
+  template:
+    src: nginx_virtualhost.j2
+    dest: /etc/nginx/conf.d/{{ virtualhost_name }}
+
+- name: Create website home directory
+  file:
+    path: /home/{{ website_directory }}
+    state: directory
+    mode: '0755'
+  notify:
+   - Reload nginx
+...

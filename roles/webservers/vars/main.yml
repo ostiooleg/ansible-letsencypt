@@ -1,0 +1,19 @@
+---
+  website_directory: ostioleg.devops.rebrain.srwx.net
+  virtualhost_name: ostioleg.devops.rebrain.srwx.net.conf
+
+  nginx_virtualhost:
+    info:
+      listen: 80
+      server_name: ostioleg.devops.rebrain.srwx.net
+      root: /home/ostioleg.devops.rebrain.srwx.net
+      access_log: /var/log/ostioleg.devops.rebrain.srwx.net.access.log
+      error_log: /var/log/ostioleg.devops.rebrain.srwx.net.error.log
+
+  nginx_main:
+    info:
+      worker_connections: 4096
+      access_log: /var/log/nginx.access.log
+      error_log: /var/log/nginx.error.log
+      keepalive_timeout: 300
+...

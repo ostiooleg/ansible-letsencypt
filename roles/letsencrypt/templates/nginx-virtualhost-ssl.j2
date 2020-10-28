@@ -1,0 +1,21 @@
+{% for item in nginx_virtualhost_ssl.values() %}
+server {
+    listen {{ item.listen_ssl }} ssl;
+    server_name {{ item.server_name }};
+    location / {
+        root  {{ item.root }};
+        index  index.html index.htm;
+    }
+
+    error_page  500 502 503 504  /50x.html;
+    location = /50x.html {
+        root  /usr/share/nginx/html;
+    }
+
+    access_log {{ item.access_log }};
+    error_log {{ item.error_log }};
+
+    ssl_certificate /etc/letsencrypt/live/{{ item.server_name }}/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/{{ item.server_name }}/privkey.pem;
+}
+{% endfor %}
